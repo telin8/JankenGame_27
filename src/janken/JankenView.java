@@ -1,3 +1,4 @@
+
 package janken;
 
 import javafx.application.Application;
