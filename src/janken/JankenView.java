@@ -22,20 +22,29 @@ public class JankenView extends Application {
 	private Button guButton;
 	private Button cyokiButton;
 	private Button paButton;
+	private JankenController jc;// じゃんけん制御オブジェクト変数
+
+	public static void main(String[] args) {
+		launch();
+	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("じゃんけんゲーム");
-		stage.setWidth(450);
+		stage.setWidth(400);
 		stage.setHeight(300);
-
 		myLayout(stage);
-
 		stage.show();
+		// じゃんけん制御クラスのインスタンス
+		jc = new JankenController(cpuLabel, humanLabel, resultLabel, scoreLabel);
+		// イベント処理
+		guButton.setOnAction(event -> jc.putOutRockHand());
+		cyokiButton.setOnAction(evet -> jc.putOutScissorsHand());
+		paButton.setOnAction(evet -> jc.putOutPaperHand());
 	}
 
 	// 画面に表示するGUI部品の基本的な設定
-	private void myLayout(Stage stage) {
+	public void myLayout(Stage stage) {
 		Font font = new Font("MS ゴシック", 20);
 
 		guButton = new Button("グー");
@@ -84,10 +93,6 @@ public class JankenView extends Application {
 
 		Scene scene = new Scene(vbox);
 		stage.setScene(scene);
-	}
-
-	public static void main(String[] args) {
-		launch();
 	}
 
 }
